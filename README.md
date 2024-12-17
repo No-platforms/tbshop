@@ -2,6 +2,8 @@
 
 A feature-rich Telegram bot for managing a shop with invoice generation, payment processing, and user management capabilities. Built with Node.js and MySQL.
 
+![TBShop](https://github.com/No-platforms/tbshop/blob/main/.github/images/tbshop.png "TBShop")
+
 ## Features
 
 ### Multi-language Support
