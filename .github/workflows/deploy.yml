@@ -1,0 +1,36 @@
+name: Deploy to CapRover
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository }}:latest
+          ghcr.io/${{ github.repository }}:${{ github.sha }}
+    
+    - name: Deploy to CapRover
+      uses: caprover/deploy-from-github@v1.1.2
+      with:
+        server: '${{ secrets.CAPROVER_SERVER }}'
+        app: '${{ secrets.CAPROVER_APP }}'
+        token: '${{ secrets.CAPROVER_TOKEN }}'
+        image: ghcr.io/${{ github.repository }}:${{ github.sha }}

@@ -1,0 +1,21 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules
+npm-debug.log
+
+# Environment
+.env
+.env.*
+
+# Development
+.vscode
+.idea
+*.md
+docker-compose*.yml
+
+# System Files
+.DS_Store
+Thumbs.db
